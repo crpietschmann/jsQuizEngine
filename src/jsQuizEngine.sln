@@ -8,20 +8,26 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "src", "http://localhost:160
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_16027"
-		Debug.AspNetCompiler.PhysicalPath = "..\..\..\GitHub\jsQuizEngine\src\"
+		Debug.AspNetCompiler.PhysicalPath = "..\src\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_16027\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_16027"
-		Release.AspNetCompiler.PhysicalPath = "..\..\..\GitHub\jsQuizEngine\src\"
+		Release.AspNetCompiler.PhysicalPath = "..\src\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_16027\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "..\..\..\GitHub\jsQuizEngine\src\"
+		SlnRelativePath = "..\src\"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51DF6276-F6A6-4A51-9688-C0E3C1C8CFA6}"
+	ProjectSection(SolutionItems) = preProject
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Global

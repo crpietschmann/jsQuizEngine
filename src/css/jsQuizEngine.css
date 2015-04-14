@@ -1,4 +1,7 @@
-﻿.question-pool {
+﻿body {
+  padding-top: 5em;
+}
+.question-pool {
   margin-bottom: 1em;
 }
 .question-pool .question label.answer {

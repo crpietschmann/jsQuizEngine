@@ -33,6 +33,7 @@
         });
         
         self.quizStarted = ko.observable(false);
+        self.quizComplete = ko.observable(false);
 
         self.quizTitle = ko.observable('');
         self.quizSubTitle = ko.observable('');
@@ -48,7 +49,12 @@
                 getAllQuestions(self.element).hide()
                 getQuestionByIndex(self.element, newValue).show();
             }
+
+            if (self.questionCount() !== 0) {
+                self.currentProgress(self.currentQuestionIndex() / self.questionCount() * 100);
+            }
         });
+        self.currentProgress = ko.observable(0);
 
         self.currentQuestionIsFirst = ko.computed(function () {
             return self.currentQuestionIndex() === 1;
@@ -77,6 +83,31 @@
             q.find('.description').slideDown();
         };
 
+        
+
+        self.calculateScore = function () {
+            self.quizComplete(true);
+
+            var correctQuestions = [];
+            getAllQuestions(self.element).each(function (i, e) {
+                var q = $(this);
+                if (q.find('.answer').length === (
+                    q.find('.answer[data-correct] > input[type=checkbox]:checked').length + q.find('.answer:not([data-correct]) > input[type=checkbox]:not(:checked)').length
+                    )) {
+                    correctQuestions.push(q);
+                }
+            });
+            self.totalQuestionsCorrect(correctQuestions.length);
+
+            if (self.questionCount() !== 0) {
+                self.calculatedScore(self.totalQuestionsCorrect() / self.questionCount() * 100);
+            }
+        };
+        self.totalQuestionsCorrect = ko.observable(0);
+        self.calculatedScore = ko.observable(0);
+        self.quizPassed = ko.computed(function () {
+            return self.calculatedScore() >= 50;
+        });
     };
 
 

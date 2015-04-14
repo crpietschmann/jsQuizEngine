@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>jsQuizEngine</title>
+
+    <link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/jsQuizEngine.css">
+
+    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.4/bootstrap.min.js"></script>
+    <script src="js/jsQuizEngine.js"></script>
+    <script>
+        var quizEngine = null;
+        $(function () {
+            quizEngine = jsQuizEngine($('#jsQuizEngine'), { quizUrl: 'quiz/default.htm' });
+        });
+    </script>
+</head>
+<body>
+    <h1>jsQuizEngine</h1>
+
+    <div id="jsQuizEngine">
+        <section id="title" data-bind="visible: !quizStarted()">
+            <hgroup>
+                <h1 data-bind="text: quizTitle"></h1>
+                <h2 data-bind="text: quizSubTitle"></h2>
+            </hgroup>
+            <button data-bind="click: startQuiz">Start Quiz</button>
+        </section>
+        <section class="quiz" data-bind="visible: quizStarted">
+            <div>Question <span data-bind="text: currentQuestionIndex"></span> of <span data-bind="text: questionCount"></span></div>
+            <div class="question-pool"></div>
+            <button data-bind="click: movePreviousQuestion, disable: currentQuestionIsFirst">Previous</button>
+            <button data-bind="click: showCurrentQuestionAnswer">Show Answer</button>
+            <button data-bind="click: moveNextQuestion, disable: currentQuestionIsLast">Next</button>
+        </section>
+    </div>
+</body>
+</html>

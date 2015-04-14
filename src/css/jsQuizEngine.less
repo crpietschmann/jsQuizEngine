@@ -1,0 +1,39 @@
+﻿body {
+}
+
+.question-pool {
+    margin-bottom: 1em;
+
+    .question {
+        label.answer {
+            display: block;
+            margin: 0;
+            padding: 0.5em;
+            border-bottom: dashed 0.1em transparent;
+            border-top: dashed 0.1em transparent;
+            > input {
+                display: inline-block;
+                float: left;
+                margin-right: 0.5em;
+            }
+            > div {
+                display: inline-block;
+            }
+        }
+        label.answer.nth-child(1) {
+            border-top: dashed 0.1em transparent;
+        }
+        .answer[data-correct].highlight {
+            background-color: rgba(0, 128, 0, 0.05);
+            border-color: rgb(0, 128, 0);
+        }
+
+        .answer:hover {
+            background-color: rgba(173, 216, 230, 0.1);
+        }
+
+        .description {
+            display: none;
+        }
+    }
+}

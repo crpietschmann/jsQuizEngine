@@ -1,4 +1,7 @@
-﻿(function (window, $) {
+﻿// jsQuizEngine https://github.com/crpietschmann/jsQuizEngine
+// Copyright (c) 2015 Chris Pietschmann http://pietschsoft.com
+// Licensed under MIT License https://github.com/crpietschmann/jsQuizEngine/blob/master/LICENSE
+(function (window, $) {
 
     function getCurrentQuiz(container) {
         return container.find('.question-pool > .quiz');

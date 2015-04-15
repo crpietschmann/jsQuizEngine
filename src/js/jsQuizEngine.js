@@ -9,6 +9,10 @@
     function getQuestionByIndex(container, index) {
         return container.find('.question-pool > .quiz .question:nth-child(' + index + ')');
     }
+    function getNowDateTimeStamp() {
+        var dt = new Date();
+        return dt.getMonth() + '/' + dt.getDate() + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + (dt.getMinutes() >= 10 ? dt.getMinutes() : '0' + dt.getMinutes());
+    }
 
     var ViewModel = function (elem, options) {
         var self = this;
@@ -86,8 +90,6 @@
         
 
         self.calculateScore = function () {
-            self.quizComplete(true);
-
             var correctQuestions = [];
             getAllQuestions(self.element).each(function (i, e) {
                 var q = $(this);
@@ -102,9 +104,14 @@
             if (self.questionCount() !== 0) {
                 self.calculatedScore(self.totalQuestionsCorrect() / self.questionCount() * 100);
             }
+
+            self.calculatedScoreDate(getNowDateTimeStamp());
+
+            self.quizComplete(true);
         };
         self.totalQuestionsCorrect = ko.observable(0);
         self.calculatedScore = ko.observable(0);
+        self.calculatedScoreDate = ko.observable('');
         self.quizPassed = ko.computed(function () {
             return self.calculatedScore() >= 50;
         });

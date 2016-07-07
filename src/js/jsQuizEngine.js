@@ -69,6 +69,10 @@
         self.currentQuestionIsLast = ko.computed(function () {
             return self.currentQuestionIndex() === self.questionCount();
         });
+        self.currentQuestionHasHint = ko.computed(function () {
+            var q = getQuestionByIndex(self.element, self.currentQuestionIndex());
+            return (q.find('.hint').length > 0);
+        });
 
         self.startQuiz = function () {
             // reset quiz to start state
@@ -83,6 +87,10 @@
         };
         self.movePreviousQuestion = function () {
             self.currentQuestionIndex(self.currentQuestionIndex() - 1);
+        };
+        self.showCurrentQuestionHint = function () {
+            var q = getQuestionByIndex(self.element, self.currentQuestionIndex());
+            q.find('.hint').slideDown();
         };
         self.showCurrentQuestionAnswer = function () {
             var q = getQuestionByIndex(self.element, self.currentQuestionIndex());

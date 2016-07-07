@@ -113,7 +113,7 @@
             self.totalQuestionsCorrect(correctQuestions.length);
 
             if (self.questionCount() !== 0) {
-                self.calculatedScore(self.totalQuestionsCorrect() / self.questionCount() * 100);
+                self.calculatedScore( Math.round( (self.totalQuestionsCorrect() / self.questionCount() * 100) * 10 ) / 10 );
             }
 
             self.calculatedScoreDate(getNowDateTimeStamp());

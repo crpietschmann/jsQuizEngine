@@ -40,6 +40,17 @@ footer {
   display: none;
   margin-top: 1em;
 }
+
+.hint {
+  display: none;
+  background-color: rgba(173, 216, 230, 0.1);
+  padding: 0.75em;
+  border-bottom: dashed 0.1em transparent;
+  border-top: dashed 0.1em transparent;
+  border-color: #008000;
+  margin-top: 1em;
+}
+
 .score .pass-indicator h1 {
   font-size: 10em;
 }

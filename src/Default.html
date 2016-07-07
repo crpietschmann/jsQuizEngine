@@ -58,6 +58,7 @@
                 </div>
                 <div class="question-pool"></div>
                 <button class="btn btn-default" data-bind="click: movePreviousQuestion, disable: currentQuestionIsFirst">Previous</button>
+                <button class="btn btn-default" data-bind="click: showCurrentQuestionHint, visible: currentQuestionHasHint()">Show Hint</button>
                 <button class="btn btn-default" data-bind="click: showCurrentQuestionAnswer">Show Answer</button>
                 <button class="btn btn-primary" data-bind="click: moveNextQuestion, disable: currentQuestionIsLast, visible: !currentQuestionIsLast()">Next</button>
                 <button class="btn btn-primary" data-bind="click: calculateScore, visible: currentQuestionIsLast">Calculate Score</button>

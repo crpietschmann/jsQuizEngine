@@ -96,6 +96,7 @@
             var q = getQuestionByIndex(self.element, self.currentQuestionIndex());
             q.find('.answer[data-correct]').addClass('highlight');
             q.find('.description').slideDown();
+            q.find('.answer').not('.answer[data-correct]').hide();
         };
 
         

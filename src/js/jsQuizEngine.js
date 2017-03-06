@@ -1,5 +1,5 @@
 ﻿// jsQuizEngine https://github.com/crpietschmann/jsQuizEngine
-// Copyright (c) 2015 Chris Pietschmann http://pietschsoft.com
+// Copyright (c) 2017 Chris Pietschmann http://pietschsoft.com
 // Licensed under MIT License https://github.com/crpietschmann/jsQuizEngine/blob/master/LICENSE
 (function (window, $) {
 
@@ -25,14 +25,25 @@
         self.element.find('.question-pool').load(self.options.quizUrl, function () {
             // quiz loaded into browser from HTML file
 
-            getCurrentQuiz(self.element).find('.answer').each(function (e, i) {
-                var elem = $(this),
-                    newAnswer = $('<label></label>').addClass('answer').append('<input type=\'checkbox\'/>').append($('<div></div>').html(elem.html()));
-                if (elem.is('[data-correct]')) {
-                    newAnswer.attr('data-correct', '1');
-                }
-                elem.replaceWith(newAnswer);
+            getCurrentQuiz(self.element).find('.question').each(function (i, e) {
+                var question = $(this),
+                    questionIndex = i,
+                    answers = question.find('.answer'),
+                    correctAnswerCount = question.find('.answer[data-correct]').length;
+
+                answers.each(function (ai, ae) {
+                    var answer = $(this),
+                        newAnswer = $('<label></label>').addClass('answer').append('<input type=\'checkbox\'/>').append($('<div></div>').html(answer.html()));
+                    if (answer.is('[data-correct]')) {
+                        newAnswer.attr('data-correct', '1');
+                    }
+                    if (correctAnswerCount <= 1){
+                        newAnswer.find('input').attr('type','radio').attr('name','question' + questionIndex);
+                    }
+                    answer.replaceWith(newAnswer);
+                });
             });
+
 
             self.questionCount(getAllQuestions(self.element).length);
             self.quizTitle(getCurrentQuiz(self.element).attr('data-title'));
@@ -105,7 +116,7 @@
             getAllQuestions(self.element).each(function (i, e) {
                 var q = $(this);
                 if (q.find('.answer').length === (
-                    q.find('.answer[data-correct] > input[type=checkbox]:checked').length + q.find('.answer:not([data-correct]) > input[type=checkbox]:not(:checked)').length
+                    q.find('.answer[data-correct] > input:checked').length + q.find('.answer:not([data-correct]) > input:not(:checked)').length
                     )) {
                     correctQuestions.push(q);
                 }
@@ -136,7 +147,7 @@
         quizUrl: 'original.htm'
     };
     engine.fn = engine.prototype = {
-        version: 0.1,
+        version: 0.2,
         init: function (elem, options) {
             var vm = new ViewModel(elem[0], options);
             ko.applyBindings(vm, elem[0]);

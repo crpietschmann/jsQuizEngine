@@ -13,3 +13,5 @@ Projects that use jsQuizEngine:
 The following link contains a brief description of why I created this project, including a screenshot of what it looks likes so far:
 
 [jsQuizEngine - lightweight javascript quiz engine](http://pietschsoft.com/post/2015/04/14/jsQuizEngine-lightweight-javascript-quiz-engine)
+
+This is a sister project to the [jsFlashEngine](http://github.com/crpietschmann/jsFlashEngine) project.

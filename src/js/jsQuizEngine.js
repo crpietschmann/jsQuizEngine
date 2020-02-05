@@ -48,6 +48,9 @@
 
 
             self.questionCount(getAllQuestions(self.element).length);
+    	    for (var i = 1; i <=  self.questionCount(); i++) {
+	        	self.questions.push({ index: i, content: getQuestionByIndex(self.element, i), correct: false});
+	        }
             self.quizTitle(getCurrentQuiz(self.element).attr('data-title'));
             self.quizSubTitle(getCurrentQuiz(self.element).attr('data-subtitle'));
         });
@@ -58,6 +61,7 @@
         self.quizTitle = ko.observable('');
         self.quizSubTitle = ko.observable('');
         self.questionCount = ko.observable(0);
+        self.questions = ko.observableArray([]);
 
         self.currentQuestionIndex = ko.observable(0);
         self.currentQuestionIndex.subscribe(function (newValue) {
@@ -111,8 +115,6 @@
             q.find('.description').slideDown();
         };
 
-        
-
         self.calculateScore = function () {
             var correctQuestions = [];
             getAllQuestions(self.element).each(function (i, e) {
@@ -121,18 +123,30 @@
                     q.find('.answer[data-correct] > input:checked').length + q.find('.answer:not([data-correct]) > input:not(:checked)').length
                     )) {
                     correctQuestions.push(q);
+                    self.questions()[i] = { index: self.questions()[i].index, content: self.questions()[i].content, correct: true};
                 }
             });
-            self.totalQuestionsCorrect(correctQuestions.length);
+    	    self.questions.valueHasMutated(); // required for updating the view
 
+            self.totalQuestionsCorrect(correctQuestions.length);
             if (self.questionCount() !== 0) {
                 self.calculatedScore( Math.round( (self.totalQuestionsCorrect() / self.questionCount() * 100) * 10 ) / 10 );
             }
-
             self.calculatedScoreDate(getNowDateTimeStamp());
-
             self.quizComplete(true);
+            $( ".solutions").addClass( "question-pool" ); // needed for styling of questions
+            var i = 1;
+            $( ".question-pool" ).find('.question').each( function() {
+                var q = $(this).clone();
+                q.appendTo('#solution-'+ i++);
+                q.show();
+                q.find('input').each( function() { $(this).attr('disabled','disabled'); });
+                q.find('.answer[data-correct]').addClass('highlight');
+                q.find('.hint').slideDown();
+                q.find('.description').slideDown();
+            });
         };
+
         self.totalQuestionsCorrect = ko.observable(0);
         self.calculatedScore = ko.observable(0);
         self.calculatedScoreDate = ko.observable('');

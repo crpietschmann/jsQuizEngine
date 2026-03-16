@@ -80,6 +80,18 @@
                         <span data-bind="visible: !quizPassed()">FAIL</span>
                     </h1>
                 </div>
+                <div class="solutions">
+                    <div data-bind="foreach: { data: questions, as: 'question' }">
+                        <h3>
+                            Question <span data-bind="text: question.index"></span> (
+                            <span data-bind="css: {'text-success': question.correct }, visible: question.correct">Correct</span>
+                            <span data-bind="css: {'text-danger': !question.correct }, visible: !question.correct">Wrong</span>
+                            )
+                        </h3>
+                    <div data-bind="attr: {'id': 'solution-' + question.index}"></div>
+                </div>
+		</div>
+
             </section>
         </div>
     </section>
